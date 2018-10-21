@@ -55,6 +55,7 @@
 
     window.onload = () => app.controller.init();
 
+    // CONTROLLER
 
     app.controller.init = () => {
         app.controller.loadTrains();
@@ -91,35 +92,22 @@
         console.log('showTrain', train);
         const trainList = document.getElementById('trainList');
 
-        const trainDiv = document.createElement('div');
-        trainDiv.classList.add('train');
+        const trainDiv = createDiv('train');
 
-        const trainOrigin = document.createElement('div');
-        trainOrigin.classList.add('train__origin');
-        trainOrigin.textContent = train.origin_name;
+        const trainOrigin = createDiv('train__origin',train.origin_name);
+        const trainDest = createDiv('train__destination',train.destination_name);
+        const trainTime = createDiv('train__departure-time',train.aimed_departure_time);
 
-        const trainDest = document.createElement('div');
-        trainDest.classList.add('train__destination');
-        trainDest.textContent = train.destination_name;
-
-        const trainDepartureTime = document.createElement('div');
-        trainDepartureTime.classList.add('train__departure-time');
-        trainDepartureTime.textContent = train.aimed_departure_time;
-
-        const trainInfo = document.createElement('button');
-        trainInfo.classList.add('train__info');
-        trainInfo.textContent = 'Details';
-
+        const trainInfo = createDiv('train__info', 'Details');
         trainInfo.dataset.trainId = train.train_uid;
         trainInfo.addEventListener('click', (event) => {
             const trainId = event.target.dataset.trainId;
             app.controller.loadTrainInfo(trainId)
         });
 
-
         trainDiv.appendChild(trainOrigin);
         trainDiv.appendChild(trainDest);
-        trainDiv.appendChild(trainDepartureTime);
+        trainDiv.appendChild(trainTime);
         trainDiv.appendChild(trainInfo);
 
         trainList.appendChild(trainDiv)
@@ -130,24 +118,14 @@
 
         trainInfoDiv.innerHTML = '';
 
-        const trainOrigin = document.createElement('div');
-        trainOrigin.classList.add('train-info__origin');
-        trainOrigin.textContent = `Departure: ${trainInfo.origin_name}`;
-
-        const trainDest = document.createElement('div');
-        trainDest.classList.add('train-info__destination');
-        trainDest.textContent = `Destination: ${trainInfo.destination_name}`;
-
-        const trainDepartureTime = document.createElement('div');
-        trainDepartureTime.classList.add('trainInfo__departure-time');
-        trainDepartureTime.textContent = `Time: ${trainInfo.aimed_departure_time}`;
-
-        const trainStops = document.createElement('div');
-        trainStops.classList.add('trainInfo__stops');
+        const trainOrigin = createDiv('train-info__origin',`Departure: ${trainInfo.origin_name}`);
+        const trainDest = createDiv('train-info__destination',`Destination: ${trainInfo.destination_name}`);
+        const trainTime = createDiv('train-info__departure-time',`Time: ${trainInfo.aimed_departure_time}`);
+        const trainStops = createDiv('train-info__stops',`Stops`);
 
         trainInfoDiv.appendChild(trainOrigin);
         trainInfoDiv.appendChild(trainDest);
-        trainInfoDiv.appendChild(trainDepartureTime);
+        trainInfoDiv.appendChild(trainTime);
         trainInfoDiv.appendChild(trainStops);
     };
 
@@ -158,7 +136,7 @@
 
     app.view.showStopDetails = (trainStop) => {
         console.log('showStopDetails', trainStop);
-        const stopsDiv = document.getElementsByClassName('trainInfo__stops')[0];
+        const stopsDiv = document.getElementsByClassName('train-info__stops')[0];
 
         const theStop = document.createElement('div');
         theStop.classList.add('train-stop');
