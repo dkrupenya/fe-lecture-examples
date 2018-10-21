@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body><h1>Quiz setTimeout 3</h1></body>
+<script>
+
+    setTimeout(() => {
+        drawBox('navy');
+        sleep(5000);
+        drawBox('olive');
+    }, 0);
+
+
+    function drawBox(color) {
+        const div = document.createElement('div');
+        div.style.width = '100px';
+        div.style.height = '100px';
+        div.style.backgroundColor = color;
+
+        const body = document.getElementsByTagName('body')[0];
+        body.appendChild(div);
+    }
+
+    function sleep(delay) {
+        const time = Date.now();
+        while (Date.now() < time + delay) {}
+    }
+
+</script>
+</html>

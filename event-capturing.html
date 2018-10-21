@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style> section {display: flex;}
+            div { width: 200px; height: 200px;margin: 10px;
+                  background-color: #dffcff;}</style>
+</head>
+<body>
+<section id="wrapper">
+    <span></span> : <span></span>
+    <div id="div1"><span></span> : <span></span></div>
+    <div id="div2"><span></span> : <span></span></div>
+</section>
+</body>
+<script>
+    let counter = 0;
+
+    const wrapper = document.getElementById('wrapper');
+    const div1 = document.getElementById('div1');
+    const div2 = document.getElementById('div2');
+
+    wrapper.addEventListener('click', (event) => clickBubble(wrapper, event));
+    div1.addEventListener('click', (event) => clickBubble(div1, event));
+    div2.addEventListener('click', (event) => clickBubble(div2, event));
+
+    function clickBubble(el, event) {
+        console.log(`${el.id} onclick bubble`, event);
+        el.children[0].innerHTML = counter++;
+    }
+
+    // wrapper.addEventListener('click', (event) => clickCapture(wrapper, event), true);
+    // div1.addEventListener('click', (event) => clickCapture(div1, event), true);
+    // div2.addEventListener('click', (event) => clickCapture(div2, event), true);
+    //
+    // function clickCapture(el, event) {
+    //     console.log(`${el.id} onclick capture`, event);
+    //     el.children[1].innerHTML = counter++;
+    // }
+
+</script>
+</html>

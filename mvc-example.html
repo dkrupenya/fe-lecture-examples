@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trains</title>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Trains Departure: London Waterloo</h1>
+    <div id="trainList" class="trains-list"></div>
+    <div id="trainInfo" class="train-info"></div>
+</div>
+</body>
+
+<!-- Templates -->
+<template id="trainListItemTemplate">
+
+</template>
+<template id="trainInfoTemplate">
+
+</template>
+<script>
+    function makeGetXHR(url: string, callback: (err, resp) => void) {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', url, true);
+        xhr.onerror = (event) => callback(xhr.responseText, null);
+        xhr.onload  = (event) => callback(null, JSON.parse(xhr.responseText));
+        xhr.send();
+    }
+
+    const TRAINS_URL = 'https://transportapi.com/v3/uk/train/station/tiploc:watrloo/2018-10-21/09:05/timetable.json?app_id=1a5b51f3&app_key=2650ae19107f191fb6f6856b40f72c1d&train_status=passenger';
+
+    const TRAIN_INFO_URL = '';
+
+
+</script>
+
+<script>
+    const app = {
+        model: {
+            trains: [],
+            currentTrain: null,
+        },
+        view: {},
+        controller: {},
+    };
+
+    window.onload(() => app.controller.init());
+
+
+    app.controller.init = () => {
+
+    };
+
+    app.controller.loadTrains = () => {
+        makeGetXHR(TRAINS_URL, (err, trains) => {
+            app.model.trains = trains || [];
+            app.view.showTrainList();
+        });
+    };
+
+    app.controller.loadTrainInfo = (id) => {
+        const url = TRAIN_INFO_URL.replace('{{id}}', id);
+        makeGetXHR(url, (err, trainInfo) => {
+            app.model.trains = trains || [];
+            app.view.showTrainInfo(trainInfo);
+        });
+    };
+
+    // VIEW
+
+    app.view.showTrainList = ()=> {
+        const trains = app.model.trains;
+        const trainList = document.getElementById('trainList');
+        trainList.innerHTML = '';
+
+        trains.forEach(train => app.vew.showTrain());
+    };
+
+    app.view.showTrain = (train) => {
+        const trainList = document.getElementById('trainList');
+
+        const trainDiv = document.createElement('div');
+        trainDiv.classList.add('train');
+
+        const trainDeparture = document.createElement('div');
+        trainDeparture.classList.add('train__departure');
+        trainDeparture.textContent = train.departure;
+
+        const trainDest = document.createElement('div');
+        trainDest.classList.add('train__destination');
+        trainDest.textContent = train.destination;
+
+        const trainDepartureTime = document.createElement('div');
+        trainDepartureTime.classList.add('train__departure-time');
+        trainDepartureTime.textContent = train.departure;
+
+        const trainInfo = document.createElement('button');
+        trainInfo.classList.add('train__info');
+        trainInfo.textContent = 'Details';
+
+        trainInfo.dataset.trainId = train.id;
+        trainInfo.addEventListener('click', (event) => {
+            const trainId = event.target.dataset.trainId;
+            app.controller.loadTrainInfo(trainId)
+        });
+
+
+        trainDiv.appendChild(trainDeparture);
+        trainDiv.appendChild(trainDest);
+        trainDiv.appendChild(trainDepartureTime);
+
+        trainList.appendChild(trainDiv)
+    };
+
+    app.view.showTrainInfo = (trainInfo) => {
+        const trainInfoDiv = document.getElementById('trainInfo');
+
+        const trainDeparture = document.createElement('div');
+        trainDeparture.classList.add('train-info__departure');
+        trainDeparture.textContent = `Departure: ${trainInfo.departure}`;
+
+        const trainDest = document.createElement('div');
+        trainDest.classList.add('train-info__destination');
+        trainDest.textContent = `Destination: ${trainInfo.departure}`;
+
+        const trainDepartureTime = document.createElement('div');
+        trainDepartureTime.classList.add('trainInfo__departure-time');
+        trainDepartureTime.textContent = `Time: ${trainInfo.departure}`;
+    }
+
+
+</script>
+</html>

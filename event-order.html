@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<div><input id="input" type="text"></div>
+<div><button id="button">Press me</button></div>
+</body>
+<script>
+
+    const input = document.getElementById('input');
+    const button = document.getElementById('button');
+
+    input.onfocus = (event) => console.log('input onfocus', event);
+    input.onblur = (event) => console.log('input onblur', event);
+    input.onkeydown = (event) => console.log('input onkeydown', event);
+    input.onkeypress = (event) => console.log('input onkeypress', event);
+    input.onkeyup = (event) => console.log('input onkeyup', event);
+
+    button.onfocus = (event) => console.log('button onfocus', event);
+    button.onblur = (event) => console.log('button onblur', event);
+    button.onkeydown = (event) => console.log('button onkeydown', event);
+    button.onkeypress = (event) => console.log('button onkeypress', event);
+    button.onkeyup = (event) => console.log('button onkeyup', event);
+    button.onmousedown = (event) => console.log('button onmousedown', event);
+    button.onmouseup = (event) => console.log('button onmouseup', event);
+    button.onclick = (event) => console.log('button onclick', event);
+
+</script>
+</html>
