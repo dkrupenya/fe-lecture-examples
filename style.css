@@ -1,0 +1,50 @@
+html, body, .wrapper {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    flex-basis: 0;
+}
+.panels {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+}
+.trains-list {
+    height: 100%;
+    padding: 12px 6px 0 12px;
+}
+.train-info {
+    padding: 12px 12px 0 6px;
+}
+
+.train {
+    display: flex;
+}
+
+.train__time {
+    width: 80px;
+}
+.train__origin {
+    flex-grow: 1;
+}
+.train__destination {
+    flex-grow: 1;
+}
+
+.train__button {
+    width: 60px;
+    background-color: gray;
+    border: 4px solid #fff;
+}

@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Trains</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrapper">
     <h1>Trains Departure: London Waterloo</h1>
-    <div id="trainList" class="trains-list"></div>
-    <div id="trainInfo" class="train-info"></div>
+    <div class="panels">
+        <div id="trainList" class="trains-list"></div>
+        <div id="trainInfo" class="train-info"></div>
+    </div>
 </div>
 </body>
 
 <!-- Templates -->
-<template id="trainListItemTemplate">
-
-</template>
-<template id="trainInfoTemplate">
-
-</template>
+<template id="trainListItemTemplate"></template>
+<template id="trainInfoTemplate"></template>
 <script>
     function makeGetXHR(url, callback) {
         const xhr = new XMLHttpRequest();
@@ -94,20 +93,20 @@
 
         const trainDiv = createDiv('train');
 
+        const trainTime = createDiv('train__time',train.aimed_departure_time);
         const trainOrigin = createDiv('train__origin',train.origin_name);
         const trainDest = createDiv('train__destination',train.destination_name);
-        const trainTime = createDiv('train__departure-time',train.aimed_departure_time);
 
-        const trainInfo = createDiv('train__info', 'Details');
+        const trainInfo = createDiv('train__button', 'Details');
         trainInfo.dataset.trainId = train.train_uid;
         trainInfo.addEventListener('click', (event) => {
             const trainId = event.target.dataset.trainId;
             app.controller.loadTrainInfo(trainId)
         });
 
+        trainDiv.appendChild(trainTime);
         trainDiv.appendChild(trainOrigin);
         trainDiv.appendChild(trainDest);
-        trainDiv.appendChild(trainTime);
         trainDiv.appendChild(trainInfo);
 
         trainList.appendChild(trainDiv)
