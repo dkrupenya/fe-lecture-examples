@@ -199,3 +199,34 @@ wrapper.addEventListener('click', event => {
     event.stopImmediatePropagation();
 
 });
+
+
+var allCookies = document.cookie;
+document.cookie='userName=guest; domain=.site.com; path=/app; expires=Tue, 01 Jan 2019 03:14:07 GMT; secure=true;';
+
+const container = document.getElementById('container');
+container.style.backgroundColor = '600px';
+
+const element: HTMLElement = document.getElementById('container');
+
+const newElement = document.createElement('tag-name');
+const newTextNode = document.createTextNode('text content');
+
+element.cloneNode(), element.cloneNode(true);
+
+element.appendChild(newElement);
+element.insertBefore(newTextNode, newElement);
+
+element.removeChild(newElement);
+element.replaceChild(newTextNode, newElement);
+
+
+document.documentElement.clientWidth;
+document.documentElement.clientHeight
+document.documentElement;
+
+
+const input: HTMLInputElement = document.getElementsByName('login');
+input.selectionStart // 5
+input.selectionEnd // 16
+input.setSelectionRange(0, 0);

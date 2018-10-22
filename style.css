@@ -41,10 +41,35 @@ h1 {
 }
 .train__destination {
     flex-grow: 1;
+    padding: 0 12px;
 }
 
 .train__button {
     width: 60px;
-    background-color: gray;
-    border: 4px solid #fff;
+    background-color: #9cbbcf;
+    border-bottom: 4px solid #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.train-info__origin, .train-info__destination {
+    font-size: 24px;
+}
+
+.train-info__stops {
+    padding-top: 24px;
+    font-size: 24px;
+}
+
+.train-stop {
+    font-size: 12px;
+    display: flex;
+}
+
+.train-stop__time {
+    width: 120px;
+}
+
+.train-stop__name {
+
 }

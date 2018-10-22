@@ -73,7 +73,6 @@
         makeGetXHR(url, (err, trainInfo) => {
             app.model.currentTrain = trainInfo || [];
             app.view.showTrainInfo(trainInfo);
-            app.view.showTrainStops(trainInfo);
         });
     };
 
@@ -113,6 +112,7 @@
     };
 
     app.view.showTrainInfo = (trainInfo) => {
+        console.time('trainInfo');
         const trainInfoDiv = document.getElementById('trainInfo');
 
         trainInfoDiv.innerHTML = '';
@@ -126,6 +126,9 @@
         trainInfoDiv.appendChild(trainDest);
         trainInfoDiv.appendChild(trainTime);
         trainInfoDiv.appendChild(trainStops);
+
+        app.view.showTrainStops(trainInfo);
+        console.timeEnd('trainInfo');
     };
 
     app.view.showTrainStops = (trainInfo) => {
